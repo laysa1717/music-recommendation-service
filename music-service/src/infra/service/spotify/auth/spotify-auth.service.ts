@@ -16,17 +16,17 @@ export class AuthSpotifyService {
         private readonly httpService: HttpService,
         private readonly configService: ConfigService,
     ) {
-        this.clientId = this.configService.get<string>('CLIENT_ID');
-        this.clientSecret = this.configService.get<string>('CLIENT_SECRET');
+        this.clientId = this.configService.get<string>('clientId');
+        this.clientSecret = this.configService.get<string>('clientSecret');
         this.authToken = Buffer.from(`${this.clientId}:${this.clientSecret}`, 'utf-8').toString('base64');
 
     }
 
     async getSpotifyToken(): Promise<void> {
-        const token_url = this.configService.get<string>('TOKEN_URL');
+        const tokenUrl = this.configService.get<string>('tokenUrl');
         const data = qs.stringify({ 'grant_type': 'client_credentials' });
 
-        const response = await lastValueFrom(this.httpService.post(token_url, data, {
+        const response = await lastValueFrom(this.httpService.post(tokenUrl, data, {
             headers: {
                 'Authorization': `Basic ${this.authToken}`,
                 'Content-Type': 'application/x-www-form-urlencoded',

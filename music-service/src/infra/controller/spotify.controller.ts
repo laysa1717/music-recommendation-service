@@ -11,9 +11,9 @@ export class SpotifyController {
   ) {}
 
   @Post('playlist')
-  async getTopTracks(@Body() genrer:any) {
+  async getTopTracks(@Body() genrer:unknown) {
     try {
-      const token:any = await this.spotifyauthservice.getSpotifyToken();    
+      const token:unknown = await this.spotifyauthservice.getSpotifyToken();    
       if (token) {
         return await this.spotifyusecase.exec(token, genrer);
       }
