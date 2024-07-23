@@ -1,13 +1,15 @@
 import { Module } from '@nestjs/common';
-import { SpotifyController } from './infra/controller/spotify.controller';
+import { GeneratePlaylistController } from './infra/controller/generate-playlist.controller';
 import { EnvConfigModule } from './infra/config/config.module';
 import { HttpModule } from '@nestjs/axios';
-import { SpotifyUseCase } from './usecase/spotify/spotify.usecase';
-import { AuthSpotifyService } from './infra/service/spotify/auth/spotify-auth.service';
+import { GeneratePlaylistUseCase } from './usecase/generate-playlist.usecase';
+import { SpotifyService } from './infra/service/spotify/spotify.service';
+import { TemperatureService } from './infra/service/temperature/temperature.service';
+
 
 @Module({
   imports: [HttpModule, EnvConfigModule],
-  controllers: [SpotifyController],
-  providers: [SpotifyUseCase, AuthSpotifyService],
+  controllers: [GeneratePlaylistController],
+  providers: [GeneratePlaylistUseCase, SpotifyService, TemperatureService],
 })
 export class AppModule {}
