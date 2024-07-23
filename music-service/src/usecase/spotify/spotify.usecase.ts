@@ -3,8 +3,8 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class SpotifyUseCase{
 
-    async exec(genero:any){
+    async exec(genrer:any){
         console.log('chegou usecase');
-        console.log(genero);
+        console.log(genrer);
     }
 }

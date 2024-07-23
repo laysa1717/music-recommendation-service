@@ -1,13 +1,24 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { SpotifyUseCase } from 'src/usecase/spotify/spotify.usecase';
+import { AuthSpotifyService } from '../service/spotify/auth/spotify-auth.service';
+
 
 @Controller('spotify')
 export class SpotifyController {
-  constructor(private readonly spotifyusecase: SpotifyUseCase) {}
+  constructor(
+    private readonly spotifyusecase: SpotifyUseCase,
+    private readonly spotifyauthservice: AuthSpotifyService
+  ) {}
 
   @Post('playlist')
-  async getTopTracks(@Body() genero:any) {
-    console.log('chegou controller');
-    await this.spotifyusecase.exec(genero);
+  async getTopTracks(@Body() genrer:any) {
+    try {
+      const token:any = await this.spotifyauthservice.getSpotifyToken();    
+      if (token) {
+        await this.spotifyusecase.exec(genrer);
+      }
+    } catch (error) {
+      return error
+    }
   }
 }

@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { SpotifyController } from './infra/controller/spotify.controller';
-import { ConfigModule } from './infra/config/config.module';
+import { EnvConfigModule } from './infra/config/config.module';
 import { HttpModule } from '@nestjs/axios';
 import { SpotifyUseCase } from './usecase/spotify/spotify.usecase';
+import { AuthSpotifyService } from './infra/service/spotify/auth/spotify-auth.service';
 
 @Module({
-  imports: [HttpModule, ConfigModule],
+  imports: [HttpModule, EnvConfigModule],
   controllers: [SpotifyController],
-  providers: [SpotifyUseCase],
+  providers: [SpotifyUseCase, AuthSpotifyService],
 })
 export class AppModule {}
