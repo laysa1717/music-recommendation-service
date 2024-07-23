@@ -9,9 +9,7 @@ export class TemperatureController {
   ) {}
 
   @Post('city')
-  async getTemperature(@Body() city:any) {
-    console.log('entra aqui');
-    
+  async getTemperature(@Body() city:any) {    
     try {
         return await this.temperatureUseCase.exec(city);
     } catch (error) {
