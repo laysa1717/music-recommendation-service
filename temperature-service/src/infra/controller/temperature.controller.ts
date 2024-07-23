@@ -9,7 +9,7 @@ export class TemperatureController {
   ) {}
 
   @Post('city')
-  async getTemperature(@Body() city:any) {    
+  async getTemperature(@Body() city:unknown) {    
     try {
         return await this.temperatureUseCase.exec(city);
     } catch (error) {

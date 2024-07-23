@@ -4,22 +4,24 @@ import { lastValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
 
 
-
 @Injectable()
 export class TemperatureUseCase {
-    private city: string;
+    private cityName: string;
+    private openWeatherMapApiKey: string;
+    private urlTemperature: string;
+
     constructor(
         private readonly httpService: HttpService,
         private readonly configService: ConfigService,
     ) { }
 
-    async exec(city: any) {
-        const apiKey = this.configService.get<string>('OPENWEATHERMAP_API_KEY');
-        const url_temperature = this.configService.get<string>('URL_TEMPERATURE');
+    async exec(city) {
+        this.openWeatherMapApiKey = this.configService.get<string>('openWeatherMapApiKey');
+        this.urlTemperature = this.configService.get<string>('urlTemperature');
 
-        this.city = city.city;
+        this.cityName = city.city;
         const response = await lastValueFrom(
-            this.httpService.get(`${url_temperature}/weather?q=${this.city}&units=metric&appid=${apiKey}`)
+            this.httpService.get(`${this.urlTemperature}/weather?q=${this.cityName}&units=metric&appid=${this.openWeatherMapApiKey}`)
         );
 
         return response.data.main.temp
