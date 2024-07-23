@@ -15,7 +15,7 @@ export class SpotifyController {
     try {
       const token:any = await this.spotifyauthservice.getSpotifyToken();    
       if (token) {
-        await this.spotifyusecase.exec(genrer);
+        return await this.spotifyusecase.exec(token, genrer);
       }
     } catch (error) {
       return error
