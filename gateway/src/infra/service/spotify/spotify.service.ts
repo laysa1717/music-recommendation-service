@@ -5,16 +5,15 @@ import { lastValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
 
 
-
 @Injectable()
 export class SpotifyService {
-    private url_spotify: string;
+    private spotifyUrl: string;
 
     constructor(
         private readonly httpService: HttpService,
         private readonly configService: ConfigService,
     ) {
-        this.url_spotify = this.configService.get<string>('SPOTIFY_URL');
+        this.spotifyUrl = this.configService.get<string>('spotifyUrl');
     }
 
     async getPlaylist(genre: string) {
@@ -22,7 +21,7 @@ export class SpotifyService {
             const payload: any = {
                 genre: genre
             }
-            const response = await this.httpService.post(this.url_spotify, payload);
+            const response = await this.httpService.post(this.spotifyUrl, payload);
             return response;
         } catch (error) {
             return error;
