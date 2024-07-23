@@ -9,7 +9,7 @@ export class GeneratePlaylistController {
   ) {}
 
   @Post('generate-playlist')
-  async generateTracks(@Body() city:any) {
+  async generateTracks(@Body() city:unknown) {
     try {
       return await this.generateplaylistusecase.exec(city);    
     } catch (error) {
