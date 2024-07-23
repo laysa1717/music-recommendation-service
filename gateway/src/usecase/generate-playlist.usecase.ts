@@ -13,16 +13,11 @@ export class GeneratePlaylistUseCase {
         private readonly temperatureService: TemperatureService
     ) { }
 
-    async exec(city: any) {
+    async exec(city: unknown) {
         try {
            return await this.temperatureService.getTemperature(city);
         } catch (error) {
            return error 
         } 
-
-    }
-
-    generateGenre(){
-
     }
 }

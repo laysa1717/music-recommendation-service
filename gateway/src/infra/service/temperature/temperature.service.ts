@@ -17,7 +17,7 @@ export class TemperatureService {
         this.spotifyUrl = this.configService.get<string>('spotifyUrl');
     }
 
-    async getTemperature(city: any) {
+    async getTemperature(city: unknown) {
         try {
 
             const response_temp = await lastValueFrom(this.httpService.post(this.generateUrl, city));
@@ -29,7 +29,7 @@ export class TemperatureService {
         }
     }
 
-    async temperatureGenreCal(temp: any) {
+    async temperatureGenreCal(temp) {
         try {
             const genre = temp >= 25 ? "pop" : temp >= 10 ? "rock" : "classica";
             const response = await lastValueFrom(this.httpService.post(this.spotifyUrl, {

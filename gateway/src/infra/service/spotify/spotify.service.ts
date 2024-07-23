@@ -18,7 +18,7 @@ export class SpotifyService {
 
     async getPlaylist(genre: string) {
         try {
-            const payload: any = {
+            const payload: unknown = {
                 genre: genre
             }
             const response = await this.httpService.post(this.spotifyUrl, payload);
